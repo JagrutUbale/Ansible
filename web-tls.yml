@@ -1,0 +1,40 @@
+--- 
+- 
+  handlers: 
+    - 
+      name: "restart nginx"
+      service: "name=nginx state=restarted"
+  hosts: webservers
+  name: "Configure webserver with nginx and tls"
+  become: true
+  tasks: 
+    - 
+      apt: "name=nginx update_cache=yes cache_valid_time=3600"
+      name: "Install nginx"
+    - 
+      file: "path=/etc/nginx/ssl state=directory"
+      name: "create directories for ssl certificates"
+    - 
+      copy: "src=files/nginx.key dest={{ key_file }} owner=root mode=0600"
+      name: "copy TLS key"
+      notify: "restart nginx"
+    - 
+      copy: "src=files/nginx.crt dest={{ cert_file }}"
+      name: "copy TLS certificate"
+      notify: "restart nginx"
+    - 
+      name: "copy nginx config file"
+      notify: "restart nginx"
+      template: "src=templates/nginx.conf.j2 dest={{ conf_file }}"
+    - 
+      file: "dest=/etc/nginx/sites-enabled/default src={{ conf_file }} state=link"
+      name: "enable configuration"
+      notify: "restart nginx"
+    - 
+      name: "copy index.html"
+      template: "src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html mode=0644"
+  vars: 
+    cert_file: /etc/nginx/ssl/nginx.crt
+    conf_file: /etc/nginx/sites-available/default
+    key_file: /etc/nginx/ssl/nginx.key
+    server_name: localhost
