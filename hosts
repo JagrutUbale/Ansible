@@ -1,2 +1,4 @@
 [webservers]
-testserver ansible_ssh_host=192.168.33.102 
+vagrant1 ansible_ssh_host=192.168.33.102 
+vagrant2 ansible_ssh_host=192.168.33.103 
+vagrant3 ansible_ssh_host=192.168.33.104 
