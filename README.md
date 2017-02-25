@@ -8,19 +8,13 @@ In this project I have created a couple of Ansible Playbooks to configure a webs
 
 ### checkbox.io
 
-* [Ansible-CheckBox.io](https://github.com/VivekBhat/Ansible-CheckBox.io):Create an ansible script that can prepare a system to run checkbox.io. Verify the system works.
+* [Ansible-CheckBox.io](https://github.com/VivekBhat/Ansible-CheckBox.io): Create an ansible script that can prepare a system to run checkbox.io. Verify the system works.
 
 ##### Dependencies
 
 * nginx
 * node
 * monogodb
-
-##### Software
-
-* Fix any missing npm packages in the package.json.
-* Modify the software to load mongo credentials from environment variables. For example, see this [connection string](https://github.com/chrisparnin/checkbox.io/blob/master/server-side/site/routes/admin.js#L20).
-* Fix any mongodb configuration issues
 
 ### iTrust
 * [Ansible-iTrust](https://github.com/VivekBhat/Ansible-iTrust): iTrust is a java application used in the undergrad software engineering system. It uses tomcat, mysql, java, and maven. It has a rich set of unit tests.
